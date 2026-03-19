@@ -1,0 +1,23 @@
+What I prompted:
+What would be the best way to prompt the user to find the word in a text file and return its values, what steps, and show me an example?
+----------------------------------------------------------------------
+What response I recieved:
+1. Prompt the user for input
+Use a Scanner to ask the user to enter a word.
+
+2. Read the user input
+Store the input string.
+
+3. Parse the input
+If the user enters multiple words, split them into individual words (like your parseUserInput() method).
+
+4. Search the dictionary file
+Open the text file using Scanner or BufferedReader.
+
+5. Compare words
+For each word in the file, check if it matches the user’s input word.
+
+6. Return the values/definition
+If a match is found, print the stored information (definition, synonyms, etc.).
+
+----------------------------------------------------------------------
