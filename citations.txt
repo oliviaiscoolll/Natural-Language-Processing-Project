@@ -1,23 +1,102 @@
 What I prompted:
-What would be the best way to prompt the user to find the word in a text file and return its values, what steps, and show me an example?
+How do I write a java method that searches for  aword in a list and prints the information in the list if its found? give me ane xample
+
+
+How can I find the positions of multiple | characters in a string and use them to split the string into parts in Java and how can I extract it from the txt file
+and give an example
 ----------------------------------------------------------------------
 What response I recieved:
-1. Prompt the user for input
-Use a Scanner to ask the user to enter a word.
 
-2. Read the user input
-Store the input string.
+public void findStudent(String name) {
 
-3. Parse the input
-If the user enters multiple words, split them into individual words (like your parseUserInput() method).
+To do this, you need a method that:
 
-4. Search the dictionary file
-Open the text file using Scanner or BufferedReader.
+takes a word as input
 
-5. Compare words
-For each word in the file, check if it matches the user’s input word.
+loops through a list of stored words
 
-6. Return the values/definition
-If a match is found, print the stored information (definition, synonyms, etc.).
+checks for a match
+
+if found, prints the related data (like part of speech and definition) stored at the same index
+The key idea is using parallel ArrayLists, where each index represents one entry.
+    
+for (int i = 0; i < studentNames.size(); i++) {
+
+      if (studentNames.get(i).equals(name)) {
+
+        System.out.println("Student: " + studentNames.get(i));
+
+        System.out.println("Subject: " + subjects.get(i));
+
+        System.out.println("Grade: " + grades.get(i));
+
+        return; // stop once found
+
+      }
+
+    }
+
+    System.out.println("Student not found.");
+
+The loop checks each word one by one
+
+When it finds a match, it prints all related info using the same index
+
+return stops the method early so it doesn’t keep searching
+
+
+
+
+1. indexOf("|") finds the first |.
+
+2. indexOf("|", firstPipe + 1) finds the next | after the first.
+
+3. substring(start, end) extracts the text between the pipes.
+
+4. The remainder of the line can be taken with substring(thirdPipe + 1).
+
+/**
+* Reads a student data file and separates each line
+* into name, grade level, and GPA using the "|" symbol.
+* The parsed data is stored in ArrayLists.
+* @param fileName name of the student file being read
+*/
+public void parseStudentFile(String fileName) {
+
+// Convert file into a list of lines
+ArrayList<String> lines = FileReader.toStringList(fileName);
+
+// Temporary lists to store parsed data
+ArrayList<String> nameList = new ArrayList<String>();
+ArrayList<Integer> gradeList = new ArrayList<Integer>();
+ArrayList<Double> gpaList = new ArrayList<Double>();
+
+// Loop through each line of the file
+for (String line : lines) {
+
+// Find positions of the separators "|"
+int firstPipe = line.indexOf("|");
+int secondPipe = line.indexOf("|", firstPipe + 1);
+
+// Extract the name, grade level, and GPA
+String name = line.substring(0, firstPipe);
+int grade = Integer.parseInt(line.substring(firstPipe + 1, secondPipe));
+double gpa = Double.parseDouble(line.substring(secondPipe + 1));
+
+// Store the extracted data into lists
+nameList.add(name);
+gradeList.add(grade);
+gpaList.add(gpa);
+}
+
+// Assign parsed lists to instance variables
+this.nameList = nameList;
+this.gradeList = gradeList;
+this.gpaList = gpaList;
+}
+
+
+
+
 
 ----------------------------------------------------------------------
